@@ -7,12 +7,29 @@ body {background-color: DimGray;}
 h1   {font-family:"Constantia";color:white;text-align:center;}
 p   {font-family:"Constantia";color:white;text-align:center;}
 table    {font-family:"Constantia";color:white;width:100%;}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
 th, td {border-bottom:1px solid DimGray;}
+.lefcol{text-align:right;}
+.rigcol{text-align:left;}
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   border-radius: 50%;
+}
+.onoff{
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  background-color: black;
+  border-radius: 100%;
 }
 .btn {
   border: none;
@@ -69,69 +86,70 @@ img {
 	function sound5() { x5.play(); }
 	function sound6() { x6.play(); }
 	function sound7() { x7.play(); }
+	function onoff() {alert("Turn on your speakers to hear the xylophone");}
 </script>
 <h1>Noel</h1>
-<table style="width:100%">
+<table style="width:100%" class="center">
   <tr>
-    <th>Age:</th>
-    <th>21</th>
+    <th class="lefcol">Age:</th>
+    <th class="rigcol">21</th>
   </tr>
   <tr>
-    <th>Senior High School Graduated From:</th>
-    <th>Colegio San Agustin - Binan</th>
+    <th class="lefcol">Senior High School Graduated From:</th>
+    <th class="rigcol">Colegio San Agustin - Binan</th>
   <tr>
-    <th>City the High School is located at:</th>
-    <th>Binan</th>
+    <th class="lefcol">City the High School is located at:</th>
+    <th class="rigcol">Binan</th>
   </tr>
   </tr>
   <tr>
-    <th>Course:</th>
-    <th>BSCS-SS</th>
+    <th class="lefcol">Course:</th>
+    <th class="rigcol">BSCS-SS</th>
   </tr>
   <tr>
-    <th>Transferee / Second Course:</th>
-    <th>No</th>
+    <th class="lefcol">Transferee / Second Course:</th>
+    <th class="rigcol">No</th>
   </tr>
   <tr>
-    <th>Did you choose this course:</th>
-    <th>Yes</th>
+    <th class="lefcol">Did you choose this course:</th>
+    <th class="rigcol">Yes</th>
   </tr>
   <tr>
-    <th>Why Yes:</th>
-    <th>The course appealed to me the most</th>
+    <th class="lefcol">Why Yes:</th>
+    <th class="rigcol">The course appealed to me the most</th>
   </tr>
   <tr>
-    <th>I.T. Experience:</th>
-    <th>Programming, Digital design, Animation, Game Design, Web Design, App Design</th>
+    <th class="lefcol">I.T. Experience:</th>
+    <th class="rigcol">Programming, Digital design, Animation, Game Design, Web Design, App Design</th>
   </tr>
   <tr>
-    <th>Hobbies / Interests:</th>
-    <th>Theater, YouTube, Reading, History, Baking, Games, Travelling</th>
+    <th class="lefcol">Hobbies / Interests:</th>
+    <th class="rigcol">Theater, YouTube, Reading, History, Baking, Games, Travelling</th>
   </tr>
   <tr>
-    <th>Age:</th>
-    <th>21</th>
+    <th class="lefcol">Age:</th>
+    <th class="rigcol">21</th>
   </tr>
   <tr>
-    <th>Goals in life:</th>
-    <th>A stable, fun, and high-paying job and an affordable and big house in metro manila</th>
+    <th class="lefcol">Goals in life:</th>
+    <th class="rigcol">A stable, fun, and high-paying job and an affordable and big house in metro manila</th>
   </tr>
   <tr>
-    <th>What do you expect to learn from this course (Web Programming):</th>
-    <th>A fun and stress-free learning experience</th>
+    <th class="lefcol">What do you expect to learn from this course (Web Programming):</th>
+    <th class="rigcol">A fun and stress-free learning experience</th>
   </tr>
   <tr>
-    <th>What do you want to learn to help you in your chosen Major:</th>
-    <th>Knowledge to help improve my old skills and learn new skills</th>
+    <th class="lefcol">What do you want to learn to help you in your chosen Major:</th>
+    <th class="rigcol">Knowledge to help improve my old skills and learn new skills</th>
   </tr>
   <tr>
-    <th>Any other interesting aspects of your life that you would like to share:</th>
-    <th>My current favorite musical is ride the cyclone</th>
+    <th class="lefcol">Any other interesting aspects of your life that you would like to share:</th>
+    <th class="rigcol">My current favorite musical is ride the cyclone</th>
   </tr>
 </table>
 <p>Add one or more pictures about yourself and your interests that you would like to share for your introduction:</p>
 <img src="tmp_1671153587521.jpg">
-<p>Turn on your speakers to hear the xylophone</p>
+<button class="onoff" onclick="onoff()">ON/OFF</button>
 <table>
     <tr>
 	<td><button class="btn btn1" onclick="sound1()">DO</button></td>
@@ -143,96 +161,4 @@ img {
 	<td><button class="btn btn7" onclick="sound7()">TI</button></td>
 	</tr>
 </table>
-<?php
-// define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = "";
-$name = $email = $gender = $comment = $website = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["name"])) {
-    $nameErr = "Name is required";
-  } else {
-    $name = test_input($_POST["name"]);
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-      $nameErr = "Only letters and white space allowed";
-    }
-  }
-  
-  if (empty($_POST["email"])) {
-    $emailErr = "Email is required";
-  } else {
-    $email = test_input($_POST["email"]);
-    // check if e-mail address is well-formed
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $emailErr = "Invalid email format";
-    }
-  }
-    
-  if (empty($_POST["website"])) {
-    $website = "";
-  } else {
-    $website = test_input($_POST["website"]);
-    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-      $websiteErr = "Invalid URL";
-    }
-  }
-
-  if (empty($_POST["comment"])) {
-    $comment = "";
-  } else {
-    $comment = test_input($_POST["comment"]);
-  }
-
-  if (empty($_POST["gender"])) {
-    $genderErr = "Gender is required";
-  } else {
-    $gender = test_input($_POST["gender"]);
-  }
-}
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?>
-
-<h2>PHP Form Validation Example</h2>
-<p><span class="error">* required field</span></p>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Name: <input type="text" name="name" value="<?php echo $name;?>">
-  <span class="error">* <?php echo $nameErr;?></span>
-  <br><br>
-  E-mail: <input type="text" name="email" value="<?php echo $email;?>">
-  <span class="error">* <?php echo $emailErr;?></span>
-  <br><br>
-  Website: <input type="text" name="website" value="<?php echo $website;?>">
-  <span class="error"><?php echo $websiteErr;?></span>
-  <br><br>
-  Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
-  <br><br>
-  Gender:
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
-  <span class="error">* <?php echo $genderErr;?></span>
-  <br><br>
-  <input type="submit" name="submit" value="Submit">  
-</form>
-
-<?php
-echo "<h2>Your Input:</h2>";
-echo $name;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $website;
-echo "<br>";
-echo $comment;
-echo "<br>";
-echo $gender;
-?>
 </body>
